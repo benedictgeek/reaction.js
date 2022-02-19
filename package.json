@@ -1,5 +1,5 @@
 {
-  "name": "reaction",
+  "name": "reaction-react",
   "description": "A package that adds animated effect on a reaction to an element",
   "keywords": [
     "reaction",
@@ -7,7 +7,7 @@
     "animated effect"
   ],
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "main": "dist/index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",

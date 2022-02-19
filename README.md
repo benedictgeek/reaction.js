@@ -3,7 +3,7 @@
 Easy and simple to use 😊
 Simply import or require the component like so:
 ```js
-import { Reaction } from "reaction"
+import { Reaction } from "reaction-react"
 ```
 
 And wrap it around the element you want to apply the animation to like so:
