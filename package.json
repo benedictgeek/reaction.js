@@ -1,6 +1,11 @@
 {
-  "name": "reaction.js",
+  "name": "reaction",
   "description": "A package that adds animated effect on a reaction to an element",
+  "keywords": [
+    "reaction",
+    "react",
+    "animated effect"
+  ],
   "version": "0.1.0",
   "private": true,
   "main": "dist/index.js",
