@@ -6,9 +6,10 @@
     "react",
     "animated effect"
   ],
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": false,
   "main": "dist/index.js",
+  "files": ["dist"],
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
