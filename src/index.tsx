@@ -1,18 +1,21 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import { ComponentProps, FC, useEffect, useState } from "react";
 
 //TODO: add a little animation to jiggle the reaction item
-//TODO: make the movement sinusodial
 
 interface ReactionTypes {
   //TODO:   direction?: string;
   maxExtent: number;
   duration: number;
+  amplitude: number;
 }
 
 const Reaction = ({
   children,
   maxExtent = 300,
   duration = 2000,
+  amplitude = 2,
   ...props
 }: ComponentProps<FC<ReactionTypes>>) => {
   const itemsBreakPoint = 30;
@@ -29,6 +32,7 @@ const Reaction = ({
           onFinish={(index) => removeItem(index)}
           maxExtent={maxExtent}
           duration={duration}
+          amplitude={amplitude}
           {...props}
         />
       );
@@ -56,16 +60,18 @@ let ReactionItem = ({
   index,
   maxExtent,
   duration,
+  amplitude,
   onFinish,
 }: ComponentProps<
   FC<{ index: number; onFinish: (index?: number) => void } & ReactionTypes>
 >) => {
   let [margin, setMargin] = useState(0);
   let [opacity, setOpacity] = useState(1);
-
+  let [moveFactor, setMoveFactor] = useState(0);
+  const converterFactor = 10;
   let startTimeStamp: any;
-  let maxExtentStep = (maxExtent * 10) / duration;
-  let opacityStep = (maxExtentStep * 10) / duration;
+  let maxExtentStep = (maxExtent * converterFactor) / duration;
+  let opacityStep = (maxExtentStep * converterFactor) / duration;
   let animationFrameId: number;
 
   useEffect(() => {
@@ -85,9 +91,11 @@ let ReactionItem = ({
     let timeElapsed = time - startTimeStamp;
 
     let computedExtent = Math.min(
-      (maxExtentStep * timeElapsed) / 10,
+      (maxExtentStep * timeElapsed) / converterFactor,
       maxExtent
     );
+
+    setMoveFactor(amplitude * Math.cos(computedExtent * converterFactor));
 
     if (computedExtent === maxExtent) {
       setOpacity(0);
@@ -104,6 +112,7 @@ let ReactionItem = ({
       style={{
         position: "absolute",
         top: margin,
+        left: moveFactor,
         opacity: opacity,
         zIndex: -1,
       }}
@@ -116,12 +125,6 @@ let ReactionItem = ({
 
 export { Reaction };
 export default Reaction;
-
-
-
-
-// import React from "react";
-// import ReactDOM from "react-dom";
 
 // import { Reaction } from "./components/index";
 
@@ -137,15 +140,15 @@ export default Reaction;
 //         alignItems: "center",
 //       }}
 //     >
-//       <Reaction maxExtent={300} duration={2000}>
+//       <Reaction maxExtent={300} duration={2000} amplitude={2}>
 //         <span style={{ cursor: "pointer", fontSize: "30px" }}>❤️</span>
 //       </Reaction>
 //       <span style={{ width: "20px" }} />
-//       <Reaction maxExtent={300} duration={2000}>
+//       <Reaction maxExtent={300} duration={2000} amplitude={2}>
 //         <span style={{ cursor: "pointer", fontSize: "30px" }}>🔥</span>
 //       </Reaction>
 //       <span style={{ width: "20px" }} />
-//       <Reaction maxExtent={300} duration={2000}>
+//       <Reaction maxExtent={300} duration={2000} amplitude={2}>
 //         <span style={{ cursor: "pointer", fontSize: "30px" }}>Ok!</span>
 //       </Reaction>
 //     </div>
