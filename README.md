@@ -1,8 +1,11 @@
 ### Add fading reactions to an element in your react projects.
 
-Easy and simple to use 😊 
+###### Easy and simple to use 😊 
 ![Reaction gif](https://media.giphy.com/media/NkVMtDIofPLqJruaqq/giphy.gif)
+
 Simply import or require the component like so:
+
+
 
 ```js
 import { Reaction } from "reaction-react";
