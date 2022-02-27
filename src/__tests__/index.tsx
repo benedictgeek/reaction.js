@@ -3,6 +3,9 @@ import "@testing-library/jest-dom";
 
 import { Reaction } from "../index";
 
+//test that an item animates (changed position)
+//test the break point for item clear
+
 test("A reaction click produces a reaction element", async () => {
   let child = <span>OK!</span>;
 

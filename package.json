@@ -1,6 +1,12 @@
 {
   "name": "reaction-react",
+  "author": {
+    "name": "Olushola Benedict"
+  },
   "description": "A package that adds animated effect on a reaction to an element",
+  "repository": {
+    "url": "https://github.com/benedictgeek/reaction.js"
+  },
   "keywords": [
     "reaction",
     "react",
