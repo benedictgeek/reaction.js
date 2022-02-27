@@ -10,7 +10,6 @@ export default {
       strict: false,
     },
   ],
-
   plugins: [typescript({ objectHashIgnoreUnknownHack: false })],
   external: ["react", "react-dom", "react/jsx-runtime"],
 };
