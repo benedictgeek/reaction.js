@@ -6,9 +6,9 @@ import { ComponentProps, FC, useEffect, useState } from "react";
 
 interface ReactionTypes {
   //TODO:   direction?: string;
-  maxExtent: number;
-  duration: number;
-  amplitude: number;
+  maxExtent?: number;
+  duration?: number;
+  amplitude?: number;
 }
 
 const Reaction = ({
@@ -48,7 +48,11 @@ const Reaction = ({
   };
 
   return (
-    <div onClick={() => handleClick()} style={{ position: "relative" }}>
+    <div
+      role="reaction"
+      onClick={() => handleClick()}
+      style={{ position: "relative" }}
+    >
       {children}
       {items}
     </div>
@@ -70,8 +74,8 @@ let ReactionItem = ({
   let [moveFactor, setMoveFactor] = useState(0);
   const converterFactor = 10;
   let startTimeStamp: any;
-  let maxExtentStep = (maxExtent * converterFactor) / duration;
-  let opacityStep = (maxExtentStep * converterFactor) / duration;
+  let maxExtentStep = (Number(maxExtent) * converterFactor) / Number(duration);
+  let opacityStep = (maxExtentStep * converterFactor) / Number(duration);
   let animationFrameId: number;
 
   useEffect(() => {
@@ -92,23 +96,27 @@ let ReactionItem = ({
 
     let computedExtent = Math.min(
       (maxExtentStep * timeElapsed) / converterFactor,
-      maxExtent
+      Number(maxExtent)
     );
 
-    setMoveFactor(amplitude * Math.cos(computedExtent * converterFactor));
+    setMoveFactor(
+      Number(amplitude) * Math.cos(computedExtent * converterFactor)
+    );
 
-    if (computedExtent === maxExtent) {
+    if (computedExtent === Number(maxExtent)) {
       setOpacity(0);
       onFinish(index);
     }
 
-    if (timeElapsed < duration) {
+    if (timeElapsed < Number(duration)) {
       animationFrameId = requestAnimationFrame(animationStep);
     }
   };
 
   return (
     <div
+      role="reactionItem"
+      // className="reactionItem"
       style={{
         position: "absolute",
         top: margin,
