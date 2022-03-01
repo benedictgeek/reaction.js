@@ -23,8 +23,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts test && rollup -c",
-    "test": "react-scripts test",
+    "build": "npm test && rollup -c",
+    "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
