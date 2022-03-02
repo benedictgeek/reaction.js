@@ -3,8 +3,6 @@ import "@testing-library/jest-dom";
 
 import { Reaction } from "../index";
 
-//test that reaction items clear after set settimeout
-
 test("A reaction click produces a reaction element", async () => {
   let child = <span>OK!</span>;
 
@@ -74,4 +72,35 @@ test("A reaction elements should have a break point of 30", async () => {
   });
 
   expect(reactionElements.length).toBe(30);
+});
+
+test("Reaction elements should reset after a breakpoint has reach wrt to duration", async () => {
+  let duration = 500;
+  let child = <span>OK!</span>;
+
+  render(<Reaction duration={duration}>{child}</Reaction>);
+
+  for (let i = 0; i < 30; i++) {
+    fireEvent.click(screen.getByRole("reaction"));
+  }
+
+  await waitFor(async () => {
+    await new Promise((resolve) => setTimeout(resolve, duration));
+  });
+
+  let reactionElements = [];
+  try {
+    reactionElements = await screen.findAllByRole("reactionItem");
+  } catch (error) {
+    if (
+      error.message.toString().trim().slice(0, 19).toLowerCase() ==
+      "unable to find role"
+    ) {
+      reactionElements = [];
+    } else {
+      throw "Something went wrong";
+    }
+  }
+
+  expect(reactionElements.length).toBe(0);
 });
