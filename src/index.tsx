@@ -9,6 +9,7 @@ interface ReactionTypes {
   maxExtent?: number;
   duration?: number;
   amplitude?: number;
+  itemsBreakPoint?: number;
 }
 
 const Reaction = ({
@@ -16,9 +17,9 @@ const Reaction = ({
   maxExtent = 300,
   duration = 2000,
   amplitude = 2,
+  itemsBreakPoint = 30,
   ...props
 }: ComponentProps<FC<ReactionTypes>>) => {
-  const itemsBreakPoint = 30;
   let [items, setItems] = useState<JSX.Element[]>([]);
 
   let handleClick = () => {
